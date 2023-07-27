@@ -26,6 +26,9 @@ def main(args):
     except ValueError as e:
         d = {'clientip': 'Task Parse Data:'}
         MyLogger.logger.warning(e, extra = d)
+    except IndexError as e:
+        d = {'clientip': 'Task Parse Data:'}
+        MyLogger.logger.warning('Введены не все данные', extra = d)
 
 if __name__ == '__main__':
     main(sys.argv)
