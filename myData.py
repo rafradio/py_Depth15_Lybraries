@@ -1,4 +1,5 @@
 from datetime import datetime, time, date, timedelta
+from errors import DataValueError
 
 year = datetime.today().year
 counter = {'corr': '0', '01': 'Первый', '02': 'Второй', '03': 'Третий', '04': 'Четвертый', '05': 'Пятый', '06': 'Шестой'}
@@ -11,10 +12,9 @@ weekdays = {'corr': '1', '00': 'Понедельник', '01': 'Вторник',
 #         return int(''.join(list(filter(str.isdigit, elm))))
 
 def findDate(arr):
+        if arr[1] > 6: raise DataValueError('День недели должен быть меньше 7')
         d = date(year=year, month=arr[2], day=1)
         delta = (arr[1] - d.weekday()) if (arr[1] - d.weekday()) > 0 else 7 - abs(arr[1] - d.weekday())
-        # print(d, arr[1], d.weekday())
-        # print(d, d1.weekday())
         d += timedelta(days=delta)
         # print(d)
         i = 1
@@ -23,4 +23,6 @@ def findDate(arr):
             if i == arr[0]: return d
             i += 1
             d += timedelta(days=7)
+
+        raise DataValueError('Такая дата не существует')
         
