@@ -23,6 +23,9 @@ def main(args):
     except DataValueError as e:
         d = {'clientip': 'Task Parse Data:'}
         MyLogger.logger.warning(e, extra = d)
+    except ValueError as e:
+        d = {'clientip': 'Task Parse Data:'}
+        MyLogger.logger.warning(e, extra = d)
 
 if __name__ == '__main__':
     main(sys.argv)
